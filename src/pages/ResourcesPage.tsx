@@ -217,7 +217,11 @@ export function ResourcesPage({
                 {activeResource.type === 'guidance' &&
               activeResource.content &&
               <div className="prose prose-slate max-w-none">
-                      {activeResource.content}
+                      {typeof activeResource.content === 'string' ? (
+                        <div dangerouslySetInnerHTML={{ __html: activeResource.content }} />
+                      ) : (
+                        activeResource.content
+                      )}
                     </div>
               }
               </div>

@@ -14,11 +14,13 @@ interface IntegrationFormProps {
   initialData?: ERPConfig | null;
   onSubmit: (data: ERPConfig) => void;
   onCancel: () => void;
+  saving?: boolean;
 }
 export function IntegrationForm({
   initialData,
   onSubmit,
-  onCancel
+  onCancel,
+  saving = false
 }: IntegrationFormProps) {
   const [activeTab, setActiveTab] = useState<'basic' | 'aria' | 'resources'>(
     'basic'
@@ -177,10 +179,11 @@ export function IntegrationForm({
           </button>
           <button
             onClick={handleSubmit}
-            className="flex-1 sm:flex-none px-4 py-2 bg-[#5C4EBF] text-white font-bold rounded-lg hover:bg-[#5C4EBF]/90 transition-colors flex items-center justify-center shadow-sm">
+            disabled={saving}
+            className="flex-1 sm:flex-none px-4 py-2 bg-[#5C4EBF] text-white font-bold rounded-lg hover:bg-[#5C4EBF]/90 transition-colors flex items-center justify-center shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
             
             <SaveIcon className="h-4 w-4 mr-2" />
-            Save
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>
